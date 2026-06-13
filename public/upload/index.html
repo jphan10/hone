@@ -18,7 +18,6 @@
       --clay-dark: #90432a;
       --muted: #6e655a;
       --eyebrow: #a8895f;
-      --cream: #e9ddcb;
       --border: #ddd3c4;
     }
 
@@ -29,7 +28,6 @@
       font-family: 'Hanken Grotesk', sans-serif;
     }
 
-    /* grain */
     body::before {
       content: '';
       position: fixed;
@@ -61,7 +59,6 @@
       font-size: 13px;
       color: var(--muted);
       text-decoration: none;
-      letter-spacing: 0.01em;
     }
     .back:hover { color: var(--clay-dark); }
 
@@ -89,27 +86,79 @@
       margin-bottom: 18px;
     }
 
-    h1 em {
-      font-style: italic;
-      color: var(--clay-dark);
-    }
+    h1 em { font-style: italic; color: var(--clay-dark); }
 
     .intro {
       font-size: clamp(15px, 1.6vw, 16px);
       line-height: 1.65;
       color: var(--muted);
-      margin-bottom: 42px;
+      margin-bottom: 44px;
+    }
+
+    /* form fields */
+    .fields {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--eyebrow);
+    }
+
+    .optional {
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--muted);
+      font-size: 11px;
+      margin-left: 6px;
+    }
+
+    input, textarea {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 15px;
+      color: var(--espresso);
+      background: rgba(255,255,255,0.5);
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 11px 14px;
+      outline: none;
+      transition: border-color 0.18s;
+      width: 100%;
+      resize: none;
+    }
+    input::placeholder, textarea::placeholder { color: #b0a496; }
+    input:focus, textarea:focus { border-color: var(--clay); background: rgba(255,255,255,0.7); }
+
+    textarea { min-height: 80px; line-height: 1.55; }
+
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: -4px;
     }
 
     /* drop zone */
     .dropzone {
       border: 1.5px dashed var(--border);
       border-radius: 8px;
-      padding: clamp(40px, 7vw, 64px) 32px;
+      padding: clamp(36px, 6vw, 56px) 32px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
       cursor: pointer;
       transition: border-color 0.2s, background 0.2s;
       background: rgba(255,255,255,0.3);
@@ -119,17 +168,22 @@
       border-color: var(--clay);
       background: rgba(180,115,79,0.04);
     }
+    .dropzone.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
 
     .dropzone-icon {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       color: var(--clay);
       opacity: 0.7;
     }
 
     .dropzone-label {
       font-family: 'Spectral', serif;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 500;
       color: var(--espresso);
     }
@@ -143,7 +197,6 @@
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
       background: var(--clay);
       color: #fff;
       font-family: 'Hanken Grotesk', sans-serif;
@@ -152,18 +205,23 @@
       letter-spacing: 0.02em;
       border: none;
       border-radius: 100px;
-      padding: 12px 28px;
+      padding: 11px 26px;
       cursor: pointer;
       transition: background 0.18s, transform 0.12s;
     }
     .btn:hover { background: var(--clay-dark); transform: translateY(-1px); }
     .btn:active { transform: translateY(0); }
 
-    /* uploaded list */
-    .uploads-section {
-      margin-top: 40px;
+    .name-required {
       display: none;
+      font-size: 12px;
+      color: #c0392b;
+      margin-top: 6px;
     }
+    .name-required.visible { display: block; }
+
+    /* uploaded list */
+    .uploads-section { margin-top: 40px; display: none; }
     .uploads-section.visible { display: block; }
 
     .uploads-label {
@@ -175,11 +233,7 @@
       margin-bottom: 16px;
     }
 
-    .uploads-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    .uploads-list { display: flex; flex-direction: column; gap: 10px; }
 
     .upload-item {
       display: grid;
@@ -206,7 +260,6 @@
       background: var(--border);
     }
 
-    .upload-info {}
     .upload-name {
       font-size: 13px;
       font-weight: 500;
@@ -215,18 +268,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .upload-status {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
+    .upload-status { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
-    .check-icon {
-      width: 20px;
-      height: 20px;
-      color: #6a9e6a;
-      flex-shrink: 0;
-    }
+    .check-icon { width: 20px; height: 20px; color: #6a9e6a; flex-shrink: 0; }
 
     .note {
       margin-top: 32px;
@@ -258,8 +302,27 @@
     <h1>Share something <em>you made.</em></h1>
     <p class="intro">
       These uploads seed the Honed landing page and the early version of the app.
-      Photography, ceramics, illustration, textiles — anything made by hand. No AI-generated images.
+      Photography, ceramics, illustration, textiles — anything made by hand.
     </p>
+
+    <div class="fields">
+      <div class="field">
+        <label for="contributor-name">Your name</label>
+        <input type="text" id="contributor-name" placeholder="e.g. Jaden Phan" autocomplete="name" />
+        <div class="name-required" id="name-error">Please enter your name so we can credit you.</div>
+      </div>
+
+      <div class="field">
+        <label for="contributor-medium">Medium</label>
+        <input type="text" id="contributor-medium" placeholder="e.g. 35mm film, wheel-thrown ceramics, linocut" />
+        <div class="hint">How would you describe what you made?</div>
+      </div>
+
+      <div class="field">
+        <label for="contributor-note">Note <span class="optional">optional</span></label>
+        <textarea id="contributor-note" placeholder="Anything you'd like us to know about the piece — the context, the moment, what you were working through."></textarea>
+      </div>
+    </div>
 
     <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Open file upload">
       <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -278,7 +341,7 @@
     </div>
 
     <p class="note">
-      <strong>What happens next:</strong> Jaden reviews uploads and selects pieces
+      <strong>What happens next:</strong> We'll review uploads and select pieces
       for the landing page and app. By uploading, you're giving permission for your work
       to appear on Honed. Credit always goes to you.
     </p>
@@ -293,69 +356,93 @@
 
     const uploadsSection = document.getElementById('uploads-section')
     const uploadsList = document.getElementById('uploads-list')
+    const nameInput = document.getElementById('contributor-name')
+    const mediumInput = document.getElementById('contributor-medium')
+    const noteInput = document.getElementById('contributor-note')
+    const nameError = document.getElementById('name-error')
 
-    const widget = cloudinary.createUploadWidget(
-      {
-        cloudName: CLOUD,
-        uploadPreset: PRESET,
-        sources: ['local', 'camera'],
-        multiple: true,
-        maxFileSize: 20000000,
-        clientAllowedFormats: ['jpg', 'jpeg', 'png', 'tiff', 'heic', 'heif', 'webp'],
-        showUploadMoreButton: true,
-        styles: {
-          palette: {
-            window: '#f3ede2',
-            windowBorder: '#ddd3c4',
-            tabIcon: '#b4734f',
-            menuIcons: '#6e655a',
-            textDark: '#2a211c',
-            textLight: '#f3ede2',
-            link: '#b4734f',
-            action: '#b4734f',
-            inactiveTabIcon: '#a8895f',
-            error: '#c0392b',
-            inProgress: '#b4734f',
-            complete: '#6a9e6a',
-            sourceBg: '#efe7da',
+    let widget = null
+
+    function buildWidget() {
+      const name = nameInput.value.trim()
+      const medium = mediumInput.value.trim()
+      const note = noteInput.value.trim()
+
+      return cloudinary.createUploadWidget(
+        {
+          cloudName: CLOUD,
+          uploadPreset: PRESET,
+          sources: ['local', 'camera'],
+          multiple: true,
+          maxFileSize: 20000000,
+          clientAllowedFormats: ['jpg', 'jpeg', 'png', 'tiff', 'heic', 'heif', 'webp'],
+          showUploadMoreButton: true,
+          context: {
+            alt: name,
+            caption: [medium, note].filter(Boolean).join(' · '),
           },
-          fonts: {
-            default: null,
-            "'Hanken Grotesk', sans-serif": {
-              url: 'https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap',
-              active: true,
+          styles: {
+            palette: {
+              window: '#f3ede2',
+              windowBorder: '#ddd3c4',
+              tabIcon: '#b4734f',
+              menuIcons: '#6e655a',
+              textDark: '#2a211c',
+              textLight: '#f3ede2',
+              link: '#b4734f',
+              action: '#b4734f',
+              inactiveTabIcon: '#a8895f',
+              error: '#c0392b',
+              inProgress: '#b4734f',
+              complete: '#6a9e6a',
+              sourceBg: '#efe7da',
+            },
+            fonts: {
+              default: null,
+              "'Hanken Grotesk', sans-serif": {
+                url: 'https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap',
+                active: true,
+              },
             },
           },
         },
-      },
-      (error, result) => {
-        if (error) return
-        if (result.event === 'success') {
-          addUploadItem(result.info)
+        (error, result) => {
+          if (error) return
+          if (result.event === 'success') addUploadItem(result.info, name)
         }
-      }
-    )
+      )
+    }
 
-    function openWidget() { widget.open() }
+    function openWidget() {
+      const name = nameInput.value.trim()
+      if (!name) {
+        nameError.classList.add('visible')
+        nameInput.focus()
+        return
+      }
+      nameError.classList.remove('visible')
+      widget = buildWidget()
+      widget.open()
+    }
+
     document.getElementById('upload-btn').addEventListener('click', e => { e.stopPropagation(); openWidget() })
     document.getElementById('dropzone').addEventListener('click', openWidget)
     document.getElementById('dropzone').addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openWidget() }
     })
+    nameInput.addEventListener('input', () => nameError.classList.remove('visible'))
 
-    function addUploadItem(info) {
+    function addUploadItem(info, contributorName) {
       uploadsSection.classList.add('visible')
-
-      const name = info.original_filename + '.' + info.format
+      const filename = info.original_filename + '.' + info.format
       const thumb = info.secure_url.replace('/upload/', '/upload/c_thumb,w_112,h_112,g_auto/')
-
       const item = document.createElement('div')
       item.className = 'upload-item'
       item.innerHTML = `
-        <img class="upload-thumb" src="${thumb}" alt="${name}" />
-        <div class="upload-info">
-          <div class="upload-name">${name}</div>
-          <div class="upload-status">${formatSize(info.bytes)} · uploaded</div>
+        <img class="upload-thumb" src="${thumb}" alt="${filename}" />
+        <div>
+          <div class="upload-name">${filename}</div>
+          <div class="upload-status">${formatSize(info.bytes)} · ${contributorName || 'uploaded'}</div>
         </div>
         <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="20 6 9 17 4 12"/>

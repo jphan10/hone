@@ -13,6 +13,7 @@ export default function Footer() {
           <a href="#how" className={styles.link}>How it works</a>
           <a href="#join" className={styles.link}>Early access</a>
           <a href="#top" className={styles.link}>Back to top</a>
+          <a href="/upload/" className={styles.link}>Submit your work</a>
         </nav>
       </div>
       <div className={styles.bottom}>
