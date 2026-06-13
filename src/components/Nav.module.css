@@ -13,12 +13,21 @@
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: 'Spectral', serif;
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 600;
   letter-spacing: 0.5px;
   color: #2c2620;
   text-decoration: none;
+}
+
+.mark {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
 }
 
 .links {
