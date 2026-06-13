@@ -8,6 +8,8 @@ const r2 = new S3Client({
     accessKeyId: process.env.CLOUDFLARE_ID,
     secretAccessKey: process.env.CLOUDFLARE_KEY,
   },
+  requestChecksumCalculation: 'WHEN_REQUIRED',
+  responseChecksumValidation: 'WHEN_REQUIRED',
 })
 
 export default async function handler(req, res) {
