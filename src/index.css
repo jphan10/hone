@@ -1,0 +1,47 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: #f3ede2;
+  color: #2c2620;
+  font-family: 'Hanken Grotesk', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection { background: #b4734f; color: #f7f2e9; }
+
+:root {
+  --paper: #f3ede2;
+  --espresso: #2a211c;
+  --clay: #b4734f;
+  --clay-dark: #90432a;
+  --muted: #6e655a;
+  --eyebrow-color: #a8895f;
+  --cream: #e9ddcb;
+  --cream-light: #f4ead8;
+  --cream-dim: #d8c9b3;
+  --border: #ddd3c4;
+}
+
+@keyframes honeCue {
+  0%, 100% { opacity: .2; transform: translateY(0); }
+  50%       { opacity: .55; transform: translateY(6px); }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .85s ease, transform .85s cubic-bezier(.2,.7,.2,1);
+}
+[data-reveal].revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
