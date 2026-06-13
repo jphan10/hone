@@ -47,14 +47,7 @@
       justify-content: space-between;
     }
 
-    .logo {
-      font-family: 'Spectral', serif;
-      font-size: 22px;
-      font-weight: 500;
-      color: var(--espresso);
-      text-decoration: none;
-    }
-
+    .logo { font-family: 'Spectral', serif; font-size: 22px; font-weight: 500; color: var(--espresso); text-decoration: none; }
     .back { font-size: 13px; color: var(--muted); text-decoration: none; }
     .back:hover { color: var(--clay-dark); }
 
@@ -90,7 +83,9 @@
       margin-bottom: 44px;
     }
 
-    .fields { display: flex; flex-direction: column; gap: 20px; margin-bottom: 32px; }
+    /* form */
+    form { display: flex; flex-direction: column; gap: 24px; }
+
     .field { display: flex; flex-direction: column; gap: 7px; }
 
     label {
@@ -125,48 +120,112 @@
     }
     input[type="text"]::placeholder, textarea::placeholder { color: #b0a496; }
     input[type="text"]:focus, textarea:focus { border-color: var(--clay); background: rgba(255,255,255,0.7); }
+    input[type="text"].invalid, textarea.invalid { border-color: #c0392b; }
     textarea { min-height: 80px; line-height: 1.55; }
 
-    .field-error {
-      display: none;
-      font-size: 12px;
-      color: #c0392b;
-    }
+    .field-error { display: none; font-size: 12px; color: #c0392b; }
     .field-error.visible { display: block; }
 
     /* dropzone */
     .dropzone {
       border: 1.5px dashed var(--border);
       border-radius: 8px;
-      padding: clamp(36px, 6vw, 56px) 32px;
+      padding: clamp(28px, 5vw, 44px) 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
       cursor: pointer;
       transition: border-color 0.2s, background 0.2s;
       background: rgba(255,255,255,0.3);
       text-align: center;
     }
-    .dropzone:hover, .dropzone.drag-over {
-      border-color: var(--clay);
-      background: rgba(180,115,79,0.04);
-    }
+    .dropzone:hover, .dropzone.drag-over { border-color: var(--clay); background: rgba(180,115,79,0.04); }
+    .dropzone.invalid { border-color: #c0392b; }
 
-    .dropzone-icon { width: 40px; height: 40px; color: var(--clay); opacity: 0.7; }
-
-    .dropzone-label {
-      font-family: 'Spectral', serif;
-      font-size: 17px;
-      font-weight: 500;
-      color: var(--espresso);
-    }
-
+    .dropzone-icon { width: 36px; height: 36px; color: var(--clay); opacity: 0.7; }
+    .dropzone-label { font-family: 'Spectral', serif; font-size: 16px; font-weight: 500; color: var(--espresso); }
     .dropzone-sub { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
-    .btn {
+    .btn-ghost {
       display: inline-flex;
       align-items: center;
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--clay-dark);
+      border: 1.5px solid rgba(144,67,42,0.3);
+      border-radius: 100px;
+      padding: 8px 18px;
+      cursor: pointer;
+      background: none;
+      transition: background 0.18s, border-color 0.18s;
+    }
+    .btn-ghost:hover { background: rgba(144,67,42,0.06); border-color: var(--clay); }
+
+    /* staged file list */
+    .staged-list { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+
+    .staged-item {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      background: rgba(255,255,255,0.5);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 12px;
+      animation: fadeUp 0.25s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .staged-thumb {
+      width: 48px; height: 48px;
+      object-fit: cover;
+      border-radius: 3px;
+      background: var(--border);
+      display: block;
+    }
+
+    .staged-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--espresso);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .staged-size { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      padding: 4px;
+      line-height: 0;
+      border-radius: 4px;
+      transition: color 0.15s;
+    }
+    .remove-btn:hover { color: #c0392b; }
+
+    /* submit row */
+    .submit-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 4px;
+    }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: var(--clay);
       color: #fff;
       font-family: 'Hanken Grotesk', sans-serif;
@@ -175,73 +234,26 @@
       letter-spacing: 0.02em;
       border: none;
       border-radius: 100px;
-      padding: 11px 26px;
+      padding: 12px 28px;
       cursor: pointer;
-      transition: background 0.18s, transform 0.12s;
+      transition: background 0.18s, transform 0.12s, opacity 0.2s;
     }
-    .btn:hover { background: var(--clay-dark); transform: translateY(-1px); }
-    .btn:active { transform: translateY(0); }
+    .btn-submit:hover { background: var(--clay-dark); transform: translateY(-1px); }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-    /* upload list */
-    .uploads-section { margin-top: 40px; display: none; }
-    .uploads-section.visible { display: block; }
+    .submit-note { font-size: 13px; color: var(--muted); }
 
-    .uploads-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--eyebrow);
-      margin-bottom: 16px;
-    }
-
-    .uploads-list { display: flex; flex-direction: column; gap: 10px; }
-
-    .upload-item {
-      display: grid;
-      grid-template-columns: 56px 1fr auto;
-      gap: 14px;
-      align-items: center;
-      background: rgba(255,255,255,0.5);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 14px;
-      animation: fadeUp 0.35s ease both;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: none; }
-    }
-
-    .upload-preview {
-      width: 56px;
-      height: 56px;
-      border-radius: 4px;
-      background: var(--border);
-      object-fit: cover;
-      display: block;
-    }
-
-    .upload-name {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--espresso);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .upload-status { font-size: 12px; color: var(--muted); margin-top: 3px; }
-
-    .progress-bar {
+    /* progress overlay on staged items */
+    .staged-item .progress-bar {
+      grid-column: 1 / -1;
       height: 2px;
       background: var(--border);
       border-radius: 2px;
-      margin-top: 6px;
       overflow: hidden;
+      margin-top: 2px;
     }
-    .progress-fill {
+    .staged-item .progress-fill {
       height: 100%;
       background: var(--clay);
       border-radius: 2px;
@@ -249,12 +261,54 @@
       transition: width 0.1s linear;
     }
 
-    .status-icon { width: 20px; height: 20px; flex-shrink: 0; }
-    .icon-done { color: #6a9e6a; }
-    .icon-error { color: #c0392b; }
+    .status-badge {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 100px;
+    }
+    .status-uploading { background: rgba(180,115,79,0.12); color: var(--clay-dark); }
+    .status-done { background: rgba(106,158,106,0.12); color: #4a7e4a; }
+    .status-error { background: rgba(192,57,43,0.1); color: #c0392b; }
+
+    /* success state */
+    .success-panel {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: clamp(40px, 7vw, 64px) 0;
+      gap: 20px;
+      animation: fadeUp 0.4s ease both;
+    }
+    .success-panel.visible { display: flex; }
+
+    .success-icon { width: 52px; height: 52px; color: #6a9e6a; }
+
+    .success-h { font-family: 'Spectral', serif; font-size: clamp(22px, 3vw, 28px); font-weight: 500; }
+    .success-h em { font-style: italic; color: var(--clay-dark); }
+
+    .success-sub { font-size: 15px; color: var(--muted); line-height: 1.6; max-width: 380px; }
+
+    .btn-again {
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      background: var(--clay);
+      color: #fff;
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 100px;
+      padding: 12px 28px;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .btn-again:hover { background: var(--clay-dark); }
 
     .note {
-      margin-top: 32px;
       font-size: 13px;
       color: var(--muted);
       line-height: 1.6;
@@ -286,141 +340,251 @@
       Photography, ceramics, illustration, textiles — anything made by hand. No AI-generated images.
     </p>
 
-    <div class="fields">
+    <form id="upload-form" novalidate>
       <div class="field">
         <label for="contributor-name">Your name</label>
         <input type="text" id="contributor-name" placeholder="e.g. Jaden Phan" autocomplete="name" />
         <div class="field-error" id="name-error">Please enter your name so we can credit you.</div>
       </div>
+
       <div class="field">
         <label for="contributor-medium">Medium</label>
         <input type="text" id="contributor-medium" placeholder="e.g. 35mm film, wheel-thrown ceramics, linocut" />
+        <div class="field-error" id="medium-error">Please describe the medium.</div>
       </div>
+
       <div class="field">
         <label for="contributor-note">Note <span class="optional">optional</span></label>
         <textarea id="contributor-note" placeholder="Anything you'd like us to know — the context, the moment, what you were working through."></textarea>
       </div>
-    </div>
 
-    <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Choose files to upload">
-      <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="17 8 12 3 7 8"/>
-        <line x1="12" y1="3" x2="12" y2="15"/>
+      <div class="field">
+        <label>Files</label>
+        <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Choose files">
+          <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          <div class="dropzone-label">Drop files here or click to browse</div>
+          <div class="dropzone-sub">JPG, PNG, TIFF, HEIC — any size</div>
+          <button type="button" class="btn-ghost" id="browse-btn">Browse files</button>
+        </div>
+        <div class="field-error" id="files-error">Please add at least one file.</div>
+        <div class="staged-list" id="staged-list"></div>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn-submit" id="submit-btn">Submit</button>
+        <span class="submit-note" id="submit-note"></span>
+      </div>
+
+      <p class="note">
+        <strong>What happens next:</strong> We'll review uploads and select pieces
+        for the landing page and app. By uploading, you're giving permission for your work
+        to appear on Honed. Credit always goes to you.
+      </p>
+    </form>
+
+    <div class="success-panel" id="success-panel">
+      <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
       </svg>
-      <div class="dropzone-label">Drop files here or click to browse</div>
-      <div class="dropzone-sub">JPG, PNG, TIFF, HEIC — any size<br>Multiple files welcome</div>
-      <button class="btn" type="button" id="upload-btn">Choose files</button>
+      <div class="success-h">Received. <em>Thank you.</em></div>
+      <p class="success-sub" id="success-sub"></p>
+      <button class="btn-again" id="btn-again">Submit another piece</button>
     </div>
-
-    <input type="file" id="file-input" accept="image/*" multiple hidden />
-
-    <div class="uploads-section" id="uploads-section">
-      <div class="uploads-label">Uploads</div>
-      <div class="uploads-list" id="uploads-list"></div>
-    </div>
-
-    <p class="note">
-      <strong>What happens next:</strong> We'll review uploads and select pieces
-      for the landing page and app. By uploading, you're giving permission for your work
-      to appear on Honed. Credit always goes to you.
-    </p>
   </main>
 
   <footer>© 2026 Honed</footer>
 
+  <input type="file" id="file-input" accept="image/*" multiple hidden />
+
   <script>
-    const nameInput     = document.getElementById('contributor-name')
-    const mediumInput   = document.getElementById('contributor-medium')
-    const noteInput     = document.getElementById('contributor-note')
-    const nameError     = document.getElementById('name-error')
-    const dropzone      = document.getElementById('dropzone')
-    const fileInput     = document.getElementById('file-input')
-    const uploadsSection = document.getElementById('uploads-section')
-    const uploadsList   = document.getElementById('uploads-list')
+    const form        = document.getElementById('upload-form')
+    const nameInput   = document.getElementById('contributor-name')
+    const mediumInput = document.getElementById('contributor-medium')
+    const noteInput   = document.getElementById('contributor-note')
+    const dropzone    = document.getElementById('dropzone')
+    const fileInput   = document.getElementById('file-input')
+    const stagedList  = document.getElementById('staged-list')
+    const submitBtn   = document.getElementById('submit-btn')
+    const submitNote  = document.getElementById('submit-note')
+    const successPanel = document.getElementById('success-panel')
+    const nameError   = document.getElementById('name-error')
+    const mediumError = document.getElementById('medium-error')
+    const filesError  = document.getElementById('files-error')
+
+    let stagedFiles = []
+
+    // --- file staging ---
+
+    document.getElementById('browse-btn').addEventListener('click', e => { e.stopPropagation(); fileInput.click() })
+    dropzone.addEventListener('click', () => fileInput.click())
+    dropzone.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click() } })
+    dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag-over') })
+    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'))
+    dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.classList.remove('drag-over'); stageFiles(e.dataTransfer.files) })
+    fileInput.addEventListener('change', () => { stageFiles(fileInput.files); fileInput.value = '' })
+
+    function stageFiles(files) {
+      Array.from(files).forEach(file => {
+        if (stagedFiles.find(f => f.name === file.name && f.size === file.size)) return
+        stagedFiles.push(file)
+        renderStagedItem(file)
+      })
+      filesError.classList.remove('visible')
+      dropzone.classList.remove('invalid')
+      updateSubmitNote()
+    }
+
+    function renderStagedItem(file) {
+      const id = `staged-${Date.now()}-${Math.random()}`
+      const item = document.createElement('div')
+      item.className = 'staged-item'
+      item.dataset.id = id
+      file._stagedId = id
+
+      const img = document.createElement('img')
+      img.className = 'staged-thumb'
+      img.alt = file.name
+      const reader = new FileReader()
+      reader.onload = e => { img.src = e.target.result }
+      reader.readAsDataURL(file)
+
+      item.innerHTML = `
+        <div class="staged-name">${file.name}</div>
+        <div class="staged-size">${formatSize(file.size)}</div>
+        <button type="button" class="remove-btn" aria-label="Remove">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      `
+      item.insertBefore(img, item.firstChild)
+
+      item.querySelector('.remove-btn').addEventListener('click', () => {
+        stagedFiles = stagedFiles.filter(f => f._stagedId !== id)
+        item.remove()
+        updateSubmitNote()
+      })
+
+      stagedList.appendChild(item)
+    }
+
+    function updateSubmitNote() {
+      const n = stagedFiles.length
+      submitNote.textContent = n > 0 ? `${n} file${n > 1 ? 's' : ''} ready` : ''
+    }
+
+    // --- validation ---
 
     function validate() {
-      const ok = nameInput.value.trim() !== ''
-      nameError.classList.toggle('visible', !ok)
-      if (!ok) nameInput.focus()
+      let ok = true
+      if (!nameInput.value.trim()) {
+        nameError.classList.add('visible'); nameInput.classList.add('invalid'); ok = false
+      }
+      if (!mediumInput.value.trim()) {
+        mediumError.classList.add('visible'); mediumInput.classList.add('invalid'); ok = false
+      }
+      if (stagedFiles.length === 0) {
+        filesError.classList.add('visible'); dropzone.classList.add('invalid'); ok = false
+      }
       return ok
     }
 
-    nameInput.addEventListener('input', () => nameError.classList.remove('visible'))
+    nameInput.addEventListener('input', () => { nameError.classList.remove('visible'); nameInput.classList.remove('invalid') })
+    mediumInput.addEventListener('input', () => { mediumError.classList.remove('visible'); mediumInput.classList.remove('invalid') })
 
-    document.getElementById('upload-btn').addEventListener('click', e => {
-      e.stopPropagation()
-      if (validate()) fileInput.click()
-    })
-    dropzone.addEventListener('click', () => { if (validate()) fileInput.click() })
-    dropzone.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (validate()) fileInput.click() }
-    })
+    // --- submit ---
 
-    dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag-over') })
-    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'))
-    dropzone.addEventListener('drop', e => {
+    form.addEventListener('submit', async e => {
       e.preventDefault()
-      dropzone.classList.remove('drag-over')
-      if (validate()) handleFiles(e.dataTransfer.files)
-    })
+      if (!validate()) return
 
-    fileInput.addEventListener('change', () => handleFiles(fileInput.files))
-
-    function handleFiles(files) {
       const meta = {
         name:   nameInput.value.trim(),
         medium: mediumInput.value.trim(),
         note:   noteInput.value.trim(),
       }
-      uploadsSection.classList.add('visible')
-      Array.from(files).forEach(file => uploadFile(file, meta))
-      fileInput.value = ''
-    }
 
-    async function uploadFile(file, meta) {
-      const item = createItem(file)
-      uploadsList.appendChild(item)
+      submitBtn.disabled = true
+      submitBtn.textContent = 'Uploading…'
 
-      const preview = item.querySelector('.upload-preview')
-      const reader = new FileReader()
-      reader.onload = e => { preview.src = e.target.result }
-      reader.readAsDataURL(file)
+      const filesToUpload = [...stagedFiles]
+      let completed = 0
+      let failed = 0
 
-      try {
-        const res = await fetch('/api/upload-url', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            filename: file.name,
-            contentType: file.type || 'application/octet-stream',
-            name: meta.name,
-            medium: meta.medium,
-            note: meta.note,
-          }),
-        })
+      await Promise.all(filesToUpload.map(async file => {
+        const item = stagedList.querySelector(`[data-id="${file._stagedId}"]`)
+        setItemStatus(item, 'uploading')
 
-        if (!res.ok) throw new Error('Failed to get upload URL')
-        const { url } = await res.json()
+        try {
+          const res = await fetch('/api/upload-url', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ filename: file.name, contentType: file.type || 'application/octet-stream', ...meta }),
+          })
+          if (!res.ok) throw new Error('Failed to get upload URL')
+          const { url } = await res.json()
+          await uploadWithProgress(file, url, meta, item)
+          setItemStatus(item, 'done')
+          completed++
+        } catch (err) {
+          setItemStatus(item, 'error', err.message)
+          failed++
+        }
+      }))
 
-        await uploadWithProgress(file, url, meta, item)
-        setDone(item, file)
-      } catch (err) {
-        setError(item, err.message)
+      if (failed === 0) {
+        showSuccess(meta.name, filesToUpload.length)
+      } else {
+        submitBtn.disabled = false
+        submitBtn.textContent = 'Retry failed'
+        submitNote.textContent = `${completed} uploaded, ${failed} failed`
+      }
+    })
+
+    function setItemStatus(item, status, msg) {
+      item.querySelectorAll('.status-badge, .progress-bar').forEach(el => el.remove())
+      const removeBtn = item.querySelector('.remove-btn')
+
+      if (status === 'uploading') {
+        const bar = document.createElement('div')
+        bar.className = 'progress-bar'
+        bar.innerHTML = '<div class="progress-fill"></div>'
+        item.appendChild(bar)
+        const badge = document.createElement('span')
+        badge.className = 'status-badge status-uploading'
+        badge.textContent = '0%'
+        if (removeBtn) removeBtn.replaceWith(badge)
+      } else if (status === 'done') {
+        const badge = document.createElement('span')
+        badge.className = 'status-badge status-done'
+        badge.textContent = 'Done'
+        item.querySelector('.status-badge, .remove-btn')?.replaceWith(badge)
+      } else if (status === 'error') {
+        const badge = document.createElement('span')
+        badge.className = 'status-badge status-error'
+        badge.textContent = 'Failed'
+        item.querySelector('.status-badge, .remove-btn')?.replaceWith(badge)
+        const sizeEl = item.querySelector('.staged-size')
+        if (sizeEl) sizeEl.textContent = msg || 'Upload failed'
       }
     }
 
     function uploadWithProgress(file, url, meta, item) {
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
-        const fill = item.querySelector('.progress-fill')
-        const status = item.querySelector('.upload-status')
 
         xhr.upload.addEventListener('progress', e => {
           if (!e.lengthComputable) return
           const pct = Math.round((e.loaded / e.total) * 100)
-          fill.style.width = pct + '%'
-          status.textContent = pct < 100 ? `${pct}%` : 'Processing…'
+          const fill = item.querySelector('.progress-fill')
+          const badge = item.querySelector('.status-badge')
+          if (fill) fill.style.width = pct + '%'
+          if (badge) badge.textContent = pct < 100 ? `${pct}%` : 'Processing…'
         })
 
         xhr.addEventListener('load', () => {
@@ -438,38 +602,25 @@
       })
     }
 
-    function createItem(file) {
-      const item = document.createElement('div')
-      item.className = 'upload-item'
-      item.innerHTML = `
-        <img class="upload-preview" alt="${file.name}" />
-        <div>
-          <div class="upload-name">${file.name}</div>
-          <div class="upload-status">${formatSize(file.size)} · uploading</div>
-          <div class="progress-bar"><div class="progress-fill"></div></div>
-        </div>
-        <div class="status-icon"></div>
-      `
-      return item
+    // --- success ---
+
+    function showSuccess(name, count) {
+      form.style.display = 'none'
+      successPanel.classList.add('visible')
+      document.getElementById('success-sub').textContent =
+        `${count} piece${count > 1 ? 's' : ''} from ${name} received. We'll be in touch when your work appears.`
     }
 
-    function setDone(item, file) {
-      item.querySelector('.upload-status').textContent = `${formatSize(file.size)} · uploaded`
-      item.querySelector('.progress-bar').remove()
-      item.querySelector('.status-icon').innerHTML = `
-        <svg class="status-icon icon-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>`
-    }
-
-    function setError(item, msg) {
-      item.querySelector('.upload-status').textContent = msg || 'Upload failed'
-      item.querySelector('.progress-bar')?.remove()
-      item.querySelector('.status-icon').innerHTML = `
-        <svg class="status-icon icon-error" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-        </svg>`
-    }
+    document.getElementById('btn-again').addEventListener('click', () => {
+      form.reset()
+      stagedFiles = []
+      stagedList.innerHTML = ''
+      submitBtn.disabled = false
+      submitBtn.textContent = 'Submit'
+      submitNote.textContent = ''
+      successPanel.classList.remove('visible')
+      form.style.display = 'flex'
+    })
 
     function formatSize(bytes) {
       if (bytes < 1000000) return (bytes / 1000).toFixed(0) + ' KB'
