@@ -21,11 +21,6 @@ export default async function handler(req, res) {
     Bucket: 'honed-uploads',
     Key: key,
     ContentType: contentType,
-    Metadata: {
-      contributor: name || '',
-      medium: medium || '',
-      note: note || '',
-    },
   })
 
   const url = await getSignedUrl(r2, command, { expiresIn: 600 })

@@ -403,14 +403,14 @@
         if (!res.ok) throw new Error('Failed to get upload URL')
         const { url } = await res.json()
 
-        await uploadWithProgress(file, url, item)
+        await uploadWithProgress(file, url, meta, item)
         setDone(item, file)
       } catch (err) {
         setError(item, err.message)
       }
     }
 
-    function uploadWithProgress(file, url, item) {
+    function uploadWithProgress(file, url, meta, item) {
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
         const fill = item.querySelector('.progress-fill')
@@ -431,6 +431,9 @@
 
         xhr.open('PUT', url)
         xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream')
+        if (meta.name)   xhr.setRequestHeader('x-amz-meta-contributor', meta.name)
+        if (meta.medium) xhr.setRequestHeader('x-amz-meta-medium', meta.medium)
+        if (meta.note)   xhr.setRequestHeader('x-amz-meta-note', meta.note)
         xhr.send(file)
       })
     }
