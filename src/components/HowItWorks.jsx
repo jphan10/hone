@@ -5,13 +5,13 @@ const STEPS = [
   {
     num: '01',
     title: 'One post a day.',
-    body: "You get one post every day. Make it count, or don’t. Either way, the pressure’s off — and everyone’s on the same footing.",
+    body: "You get one post every day, make it count. We want your work to speak for itself, so give it space to live and breathe.",
     delay: '0s',
   },
   {
     num: '02',
     title: 'Swipe across mediums.',
-    body: "Film, ceramics, illustration, textiles, stamps. One swipe carries you somewhere you wouldn’t have gone looking.",
+    body: "Photography, ceramics, illustration, textiles, stamps, and more. One swipe carries you somewhere you wouldn’t have gone looking. We won't limit your creativity.",
     delay: '0.07s',
   },
   {
@@ -23,7 +23,7 @@ const STEPS = [
   {
     num: '04',
     title: 'A dashboard only you see.',
-    body: "Watch your practice grow in private. Your impact is yours alone — never a number you perform for.",
+    body: "Watch your practice grow in private. Your impact is yours alone, never a number you perform for.",
     delay: '0.21s',
   },
 ]
