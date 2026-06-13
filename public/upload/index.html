@@ -527,8 +527,13 @@
             body: JSON.stringify({ filename: file.name, contentType: file.type || 'application/octet-stream', ...meta }),
           })
           if (!res.ok) throw new Error('Failed to get upload URL')
-          const { url } = await res.json()
-          await uploadWithProgress(file, url, meta, item)
+          const { url, key } = await res.json()
+          await uploadWithProgress(file, url, item)
+          await fetch('/api/save-metadata', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key, ...meta }),
+          })
           setItemStatus(item, 'done')
           completed++
         } catch (err) {
@@ -574,7 +579,7 @@
       }
     }
 
-    function uploadWithProgress(file, url, meta, item) {
+    function uploadWithProgress(file, url, item) {
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
 
@@ -595,9 +600,6 @@
 
         xhr.open('PUT', url)
         xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream')
-        if (meta.name)   xhr.setRequestHeader('x-amz-meta-contributor', meta.name)
-        if (meta.medium) xhr.setRequestHeader('x-amz-meta-medium', meta.medium)
-        if (meta.note)   xhr.setRequestHeader('x-amz-meta-note', meta.note)
         xhr.send(file)
       })
     }
