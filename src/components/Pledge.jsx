@@ -28,7 +28,7 @@ export default function Pledge() {
           />
         </svg>
         <p className={styles.body}>
-          Everything on Honed is made by a person. No generated images, no mass-produced &ldquo;art,&rdquo; no
+          Everything on Honed is made by a person. No generated images, no mass-produced &ldquo;art&rdquo;, no
           feed engineered to keep you scrolling. Just intentional work, made by real hands, shown one moment at a time.
         </p>
         <p className={styles.footer}>It&rsquo;s a small promise. We intend to keep it.</p>
