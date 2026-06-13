@@ -10,12 +10,27 @@
   background: linear-gradient(160deg, #cdbfa6, #b9a98c 70%, #a89878);
 }
 
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 .grain {
   position: absolute;
   inset: 0;
   pointer-events: none;
   opacity: 0.45;
   mix-blend-mode: multiply;
+}
+
+.mask {
+  position: absolute;
+  inset: 0;
+  background: rgba(22, 16, 12, 0.72);
 }
 
 .vignette {
@@ -26,6 +41,7 @@
 
 .quote {
   position: relative;
+  z-index: 1;
   max-width: 860px;
   margin: 0;
   font-family: 'Spectral', serif;

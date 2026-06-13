@@ -1,12 +1,5 @@
-// Approved pieces for the Marketplace section.
-// To add a new piece:
-//   1. Download the image from Cloudinary Console (honed/landing folder)
-//   2. Optimize it (aim for <400 KB) and drop it in src/assets/marketplace/
-//   3. Import it below and add an entry to the PIECES array.
-//
-// The Marketplace component shuffles this pool and picks 3 on each page load.
-
-// import jadenFilm01 from '../assets/marketplace/jaden-film-01.jpg'
+import dscf0899 from '../assets/marketplace/dscf0899.jpg'
+import dscf1278 from '../assets/marketplace/dscf1278.jpg'
 
 const GRADIENTS = [
   'linear-gradient(150deg, #e6d8c2, #d3c1a4)',
@@ -16,11 +9,13 @@ const GRADIENTS = [
   'linear-gradient(150deg, #ebe0cc, #d8c6a8)',
 ]
 
+// Pool of approved pieces. Shuffle kicks in automatically once there are more than 3.
+// To add a new piece:
+//   1. Drop optimized image into src/assets/marketplace/
+//   2. Import it above
+//   3. Add an entry below (img: theImport, label, artist, medium)
 export const PIECES = [
-  { bg: GRADIENTS[0], label: 'film photograph', artist: 'Jaden Phan',  medium: '35mm, hand-printed' },
-  { bg: GRADIENTS[1], label: 'stoneware',       artist: 'Theo Hart',   medium: 'wheel-thrown vessel' },
-  { bg: GRADIENTS[2], label: 'linocut',         artist: 'Ren Okafor',  medium: 'hand-pulled print' },
+  { img: dscf1278, label: '', artist: 'Jaden Phan', medium: 'Digital' },
+  { bg: GRADIENTS[0], label: 'coming soon',      artist: '—',         medium: '' },
+  { bg: GRADIENTS[0], label: 'coming soon',      artist: '—',         medium: '' },
 ]
-
-// Once you have more than 3 pieces, add them here and the shuffle will kick in:
-// { img: jadenFilm01, label: 'film photograph', artist: 'Jaden Phan', medium: '35mm, hand-printed' },

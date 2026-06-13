@@ -20,6 +20,9 @@ dist-ssr
 # Claude Code local settings
 .claude/
 
+# Raw/unoptimized source images (optimize with npm run optimize)
+scripts/raw/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
