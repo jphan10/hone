@@ -8,7 +8,7 @@ import HowItWorks from './components/HowItWorks'
 import Marketplace from './components/Marketplace'
 import Waitlist from './components/Waitlist'
 import Footer from './components/Footer'
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 
 export default function App() {
   return (

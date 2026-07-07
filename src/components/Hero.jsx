@@ -29,10 +29,10 @@ export default function Hero() {
   return (
     <header id="top" className={styles.hero}>
       <div className={styles.inner}>
-        <div className={styles.eyebrow}>A home for human-made work</div>
+        <div className={styles.eyebrow}>A home for human work</div>
         <h1 className={styles.h1}>
           Art made by hand.<br />
-          Posted by humans.<br />
+          Posted by people.<br />
           <em>One at a time.</em>
         </h1>
         <p className={styles.tagline} aria-label="One post, one moment at a time.">
